@@ -207,7 +207,11 @@ export default class ActionButton extends Component {
           }}
           onPress={() => {
             this.props.onPress();
-            if (this.props.children && !this.props.onlyOpenLong) this.animateButton();
+            if (this.props.children) {
+              if (!this.props.onlyOpenLong || this.state.active) {
+                this.animateButton();
+              }
+            }
           }}
           onPressIn={this.props.onPressIn}
           onPressOut={this.props.onPressOut}
