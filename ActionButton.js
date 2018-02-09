@@ -201,10 +201,13 @@ export default class ActionButton extends Component {
             this.props.fixNativeFeedbackRadius
           )}
           activeOpacity={this.props.activeOpacity}
-          onLongPress={this.props.onLongPress}
+          onLongPress={() => {
+            this.props.onLongPress();
+            if (this.props.children) this.animateButton();
+          }}
           onPress={() => {
             this.props.onPress();
-            if (this.props.children) this.animateButton();
+            if (this.props.children && !this.props.onlyOpenLong) this.animateButton();
           }}
           onPressIn={this.props.onPressIn}
           onPressOut={this.props.onPressOut}
@@ -349,7 +352,7 @@ ActionButton.propTypes = {
   ]),
 
   renderIcon: PropTypes.func,
-  
+
   bgColor: PropTypes.string,
   bgOpacity: PropTypes.number,
   buttonColor: PropTypes.string,
@@ -369,6 +372,7 @@ ActionButton.propTypes = {
   verticalOrientation: PropTypes.oneOf(["up", "down"]),
   backgroundTappable: PropTypes.bool,
   activeOpacity: PropTypes.number,
+  onlyOpenLong: PropTypes.bool, // only open the menu on a long press
 
   useNativeFeedback: PropTypes.bool,
   fixNativeFeedbackRadius: PropTypes.bool,
@@ -389,6 +393,7 @@ ActionButton.defaultProps = {
   outRangeScale: 1,
   autoInactive: true,
   onPress: () => {},
+  onLongPress: () => {},
   onPressIn: () => {},
   onPressOn: () => {},
   backdrop: false,

@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: "#eee",
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     height: TEXT_HEIGHT
   },
   text: {
